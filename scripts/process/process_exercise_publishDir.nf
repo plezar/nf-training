@@ -1,7 +1,7 @@
 //process_exercise_pubilishDir.nf
 nextflow.enable.dsl=2
 
- process INDEX {
+process INDEX {
   //add publishDir directive here
   input:
   path transcriptome
@@ -11,13 +11,13 @@ nextflow.enable.dsl=2
 
   script:
   """
-    salmon index -t $transcriptome -i index
+  salmon index -t $transcriptome -i index
   """
- }
+}
 
- params.transcriptome = "$projectDir/data/yeast/transcriptome/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa.gz"
- transcriptome_ch = channel.fromPath(params.transcriptome,checkIfExists: true)
+params.transcriptome = "$projectDir/data/yeast/transcriptome/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa.gz"
+transcriptome_ch = channel.fromPath(params.transcriptome, checkIfExists: true)
 
-workflow{
-  INDEX(transcriptome_ch)
+workflow {
+ INDEX(transcriptome_ch)
 }

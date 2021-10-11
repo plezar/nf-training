@@ -13,8 +13,9 @@ process METHOD {
   echo $x > method.txt
   """
 }
-
-methods_ch = channel.of('salmon','kallisto')
+// Both 'Channel' and 'channel' keywords work to generate channels.
+// However, it is a good practice to be consistent through the whole pipeline development
+methods_ch = channel.of('salmon', 'kallisto')
 
 workflow {
   METHOD(methods_ch)

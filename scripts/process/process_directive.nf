@@ -1,4 +1,4 @@
-//process_exercise_directives.nf
+//process_directives.nf
 nextflow.enable.dsl=2
 
 process PRINTCHR {
@@ -8,6 +8,7 @@ process PRINTCHR {
 
   input:
   val chr
+  
   script:
   """
   echo processing chromosome: $chr
@@ -15,7 +16,7 @@ process PRINTCHR {
   """
 }
 
-chr_ch = channel.of(1..22,'X','Y')
+chr_ch = channel.of(1..22, 'X', 'Y')
 
 workflow {
   PRINTCHR(chr_ch)

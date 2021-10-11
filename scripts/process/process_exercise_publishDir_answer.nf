@@ -1,22 +1,23 @@
 //process_exercise_publishDir_answer.nf
 nextflow.enable.dsl=2
 
- process INDEX {
+process INDEX {
   publishDir "results", mode: "copy"
+  
   input:
   path transcriptome
 
   output:
   path "index"
 
- script:
+  script:
   """
-    salmon index -t $transcriptome -i index
- """
+  salmon index -t $transcriptome -i index
+  """
 }
 
-params.transcriptome = "$projectDir/data/yeast/transcriptome/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa.gz"
- transcriptome_ch = channel.fromPath(params.transcriptome,checkIfExists: true)
+params.transcriptome = "data/yeast/transcriptome/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa.gz"
+transcriptome_ch = channel.fromPath(params.transcriptome, checkIfExists: true)
 
 workflow{
   INDEX(transcriptome_ch)

@@ -3,7 +3,8 @@ nextflow.enable.dsl=2
 
 process TUPLEINPUT{
   input:
-    tuple val(sample_id), path(reads)
+  tuple val(sample_id), path(reads)
+  
   script:
   """
   echo $sample_id

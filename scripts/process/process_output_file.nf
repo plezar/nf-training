@@ -1,8 +1,7 @@
 //process_output_file.nf
-
 nextflow.enable.dsl=2
 
-methods_ch = channel.of('salmon','kallisto')
+methods_ch = channel.of('salmon', 'kallisto')
 
 process METHOD {
   input:
@@ -15,6 +14,7 @@ process METHOD {
   echo $x > method.txt
   """
 }
+
 workflow {
   METHOD(methods_ch)
   // use the view operator to display contents of the channel
