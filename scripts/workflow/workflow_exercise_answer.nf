@@ -1,5 +1,4 @@
-//workflow_exercise.nf
-
+//workflow_exercise_answer.nf
 nextflow.enable.dsl=2
 
 params.reads = 'data/yeast/reads/*_{1,2}.fq.gz'
@@ -21,6 +20,7 @@ process FASTQC {
 
 process PARSEZIP {
   publishDir "results/fqpass", mode:"copy"
+  
   input:
   path flagstats
 
@@ -33,8 +33,13 @@ process PARSEZIP {
   """
 }
 
-read_pairs_ch = channel.fromFilePairs(params.reads,checkIfExists: true)
+read_pairs_ch = channel.fromFilePairs(params.reads, checkIfExists: true)
 
 workflow {
   PARSEZIP(FASTQC(read_pairs_ch).collect())
 }
+
+// workflow {
+//   FASTQC(read_pairs_ch)
+//   PARSEZIP(FASTQC.out.collect())
+// }

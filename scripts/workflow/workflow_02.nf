@@ -1,7 +1,7 @@
+//workflow_02.nf
 nextflow.enable.dsl=2
 
 process INDEX {
-
   input:
   path transcriptome
 
@@ -15,20 +15,23 @@ process INDEX {
 }
 
 process QUANT {
-   input:
-     each  path(index)
-     tuple(val(pair_id), path(reads))
-   output:
-     path pair_id
-   script:
-     """
-     salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
-     """
+  input:
+  each path(index)
+  tuple(val(pair_id), path(reads))
+  
+  output:
+  path pair_id
+   
+  script:
+  """
+  salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
+  """
 }
 
 workflow {
   transcriptome_ch = channel.fromPath('data/yeast/transcriptome/*.fa.gz')
   read_pairs_ch = channel.fromFilePairs('data/yeast/reads/*_{1,2}.fq.gz')
+
   INDEX(transcriptome_ch)
-  QUANT(INDEX.out.salmon_index,read_pairs_ch).view()
+  QUANT(INDEX.out.salmon_index, read_pairs_ch).view()
 }
