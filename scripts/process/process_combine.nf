@@ -5,10 +5,11 @@ process COMBINE {
   input:
   val x
   val y
+
   script:
-   """
-   echo $x and $y
-   """
+  """
+  echo $x and $y
+  """
 }
 
 num_ch = Channel.of(1,2,3)

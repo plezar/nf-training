@@ -1,10 +1,12 @@
 //process_execise_combine_answer.nf
 nextflow.enable.dsl=2
+
 process COMBINE {
- input:
- path transcriptome
- val kmer
- script:
+  input:
+  path transcriptome
+  val kmer
+
+  script:
   """
   salmon index -t $transcriptome -i index -k $kmer
   """

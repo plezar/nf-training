@@ -1,5 +1,6 @@
 // salmon_index_combine.nf
 nextflow.enable.dsl=2
+
 process COMBINE {
 
 }

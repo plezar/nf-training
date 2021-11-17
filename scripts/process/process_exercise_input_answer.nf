@@ -4,6 +4,7 @@ nextflow.enable.dsl=2
 process FASTQC {
    input:
    path reads
+   
    script:
    """
    mkdir fastqc_out

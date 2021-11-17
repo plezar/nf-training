@@ -21,7 +21,7 @@ process INDEX {
   }
   else {
     """
-    echo Unknown aligner $params.aligner"
+    echo Unknown aligner $params.aligner
     """
   }
 }

@@ -4,9 +4,10 @@ nextflow.enable.dsl=2
 process NUMLINES {
     input:
     path 'sample.fq.gz'
+
     script:
     """
-    printf 'sample.fq.gz'
+    printf 'sample.fq.gz '
     gunzip -c sample.fq.gz | wc -l
     """
 }
