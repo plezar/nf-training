@@ -17,7 +17,7 @@ process INDEX {
 process QUANT {
   input:
   each path(index)
-  tuple(val(pair_id), path(reads))
+  tuple (val(pair_id), path(reads))
   
   output:
   path pair_id

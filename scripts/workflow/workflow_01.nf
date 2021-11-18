@@ -14,7 +14,7 @@ process INDEX {
     """
 }
 
- process QUANT {
+process QUANT {
     input:
     each path(index)
     tuple (val(pair_id), path(reads))
@@ -33,8 +33,8 @@ workflow {
     read_pairs_ch = channel.fromFilePairs('data/yeast/reads/*_{1,2}.fq.gz', checkIfExists: true)
 
     //index process takes 1 input channel as a parameter
-    index_obj = INDEX(transcriptome_ch)
+    index_ch = INDEX(transcriptome_ch)
 
     //quant channel takes 2 input channels as parameters
-    QUANT(index_obj, read_pairs_ch).view()
+    QUANT(index_ch, read_pairs_ch).view()
 }
