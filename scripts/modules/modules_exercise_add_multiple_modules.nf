@@ -4,5 +4,5 @@ read_pairs_ch = channel.fromFilePairs( params.reads, checkIfExists:true )
 
 workflow {
    FASTQC(read_pairs_ch)
-   MULTIQC(fastqc.out.collect())
+   MULTIQC(FASTQC.out.collect())
 }
